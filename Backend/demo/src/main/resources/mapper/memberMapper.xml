@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.demo.Member.MemberDAO">
+    <select id="select" resultType="kr.co.demo.Member.MemberItem">
+        select mpass,salt from member where mid=#{mid}
+    </select>
+    <select id="idlist" resultType="kr.co.demo.Member.MemberItem">
+        select count(mid) as count from member where mid=#{mid}
+    </select>
+    <insert id="signup">
+        insert into member (mid, mpass, mpass_check, mname, salt) values (#{mid}, #{mpass}, #{mpass_check}, #{mname}, #{salt})
+    </insert>
+</mapper>
