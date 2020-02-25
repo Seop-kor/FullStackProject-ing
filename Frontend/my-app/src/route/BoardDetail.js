@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 class BoardDetail extends React.Component{
     componentDidMount(){
@@ -7,6 +7,12 @@ class BoardDetail extends React.Component{
         if(location.state === undefined){
             history.push("/board");
         }
+    }
+
+    deleteItem = async () =>{
+        const {location, history} = this.props;
+        await axios.delete(`http://localhost:8080/board/${location.state.no}`);
+        history.goBack();
     }
 
     render(){
@@ -29,14 +35,7 @@ class BoardDetail extends React.Component{
                         <td>{location.state.content}</td>
                     </tr>
                     <tr>
-                        <td><Link to={
-                            {
-                                pathname: `/boardDelete/${location.state.no}`,
-                                state: {
-                                    no: location.state.no
-                                }
-                            }
-                        } className="btn btn-primary">삭제</Link></td>
+                        <td><button type="button" className="btn btn-primary" onClick={this.deleteItem}>삭제</button></td>
                     </tr>
                 </tbody>
             </table>

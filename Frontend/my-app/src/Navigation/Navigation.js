@@ -1,24 +1,72 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Navigation() {
-    return (
-        <>
-            <Link to="/" className="navbar-brand">Logo</Link>
-            <div className="container-fluid">
-                <ul className="navbar-nav">
-                    <li className="nav-item"><Link to="/info" className="nav-link">Information</Link></li>
-                    <li className="nav-item"><Link to="/product" className="nav-link">Product</Link></li>
-                    <li className="nav-item"><Link to="/board" className="nav-link">Board</Link></li>
-                </ul>
-                <div className="justify-content-end">
-                    <Link to="/login" className="text-light">로그인</Link>
-                    &nbsp;&nbsp;
-                        <Link to="/signup" className="text-light">회원가입</Link>
+class Navigation extends React.Component{
+
+    constructor(props){
+        super(props);
+        const id = window.sessionStorage.getItem('id');
+        const name = window.sessionStorage.getItem('name');
+        if(id){
+            this.state={
+                login: true,
+                id,
+                name
+            }
+        }else{
+            this.state={
+                login: false
+            }
+        }
+        
+    }
+
+
+    Logout = () =>{
+        window.sessionStorage.clear();
+        this.setState({
+            login: false
+        });
+    }
+
+    stat = () => {
+        const {login, name} = this.state;
+        if(login){
+            return (
+                <>
+                <span>{name}님 환영합니다.</span>
+                &nbsp;&nbsp;
+                <span className="text-light" onClick={this.Logout}>로그아웃</span>
+                </>
+            );
+        }else{
+            return (
+                <>
+                <Link to="/login" className="text-light">로그인</Link>
+                &nbsp;&nbsp;
+                <Link to="/signup" className="text-light">회원가입</Link>
+                </>
+            );
+        }
+    }
+
+    render(){
+        return (
+            <>
+                <Link to="/" className="navbar-brand">Logo</Link>
+                <div className="container-fluid">
+                    <ul className="navbar-nav">
+                        <li className="nav-item"><Link to="/info" className="nav-link">Information</Link></li>
+                        <li className="nav-item"><Link to="/product" className="nav-link">Product</Link></li>
+                        <li className="nav-item"><Link to="/board" className="nav-link">Board</Link></li>
+                    </ul>
+                    <div className="justify-content-end">
+                        {this.stat()}
+                    </div>
                 </div>
-            </div>
-        </>
-    );
+            </>
+        );
+    }
 }
 
 export default Navigation;

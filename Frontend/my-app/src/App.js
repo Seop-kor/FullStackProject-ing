@@ -7,16 +7,17 @@ import Information from './route/Information';
 import Navigation from './Navigation/Navigation';
 import Detail from './route/Detail';
 import BoardDetail from './route/BoardDetail';
-import BoardDelete from './route/BoardDelete';
 import Login from './route/Login';
 import Signup from './route/Signup';
+import BoardWrite from './route/BoardWrite';
+
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <div>
-          <nav className="navbar navbar-expand-md bg-primary navbar-light">
+          <nav className="navbar navbar-expand-md bg-primary navbar-light" id="navbarcontainer">
             <Navigation />
           </nav>
         </div>
@@ -27,13 +28,12 @@ function App() {
           <Route path="/product/:num" component={Detail} />
           <Route path="/board" exact={true} component={Board} />
           <Route path="/board/:no" component={BoardDetail} />
-          <Route path="/login" component={Login}/>
-          <Route path="/signup" component={Signup}/>
-          <Route path="/boardDelete/:no" component={BoardDelete}/>
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/write" component={BoardWrite} />
         </div>
       </BrowserRouter>
     </>
-
   );
 }
 

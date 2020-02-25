@@ -11,18 +11,19 @@ class Board extends React.Component {
     getBoardList = async () => {
         const {
             data: { data }
-        } = await axios.get("http://localhost:8080/boardlist");
+        } = await axios.get("http://localhost:8080/board");
         this.setState({ Boards: data });
     }
 
     componentDidMount() {
         this.getBoardList();
     }
+
     render() {
         const { Boards } = this.state;
         return (
             <>
-                <div className="container-fluid">
+                <div>
                     <Link to="/write" className="btn btn-success">글쓰기</Link>
                 </div>
                 <div>

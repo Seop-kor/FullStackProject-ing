@@ -23,12 +23,12 @@ class Login extends React.Component{
         await axios.get(`http://localhost:8080/login/${id}`).then((data,error) => {
             crypto.pbkdf2(pass, data.data[1], 100000, 64, 'sha512', (err,key) =>{
                 if(key.toString('base64') === data.data[0]){
+                    window.sessionStorage.setItem('id',id);
+                    window.sessionStorage.setItem('name',data.data[2]);
                     history.push({
-                        pathname: "/",
-                        state: {
-                            login: true,
-                        }
+                        pathname: "/"
                     });
+                    window.location.reload();
                 }else{
                     alert("아이디나 패스워드가 일치하지않습니다.");
                 }
