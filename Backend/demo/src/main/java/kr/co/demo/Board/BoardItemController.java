@@ -14,7 +14,7 @@ public class BoardItemController {
     BoardItemService service;
 
 
-    @RequestMapping(value = "/boardlist", method = RequestMethod.GET)
+    @RequestMapping(value = "/board", method = RequestMethod.GET)
     public @ResponseBody BoardItemResponse boardlist(){
         List<String> errors = new ArrayList<>();
         List<BoardItem> items = null;
@@ -27,22 +27,32 @@ public class BoardItemController {
         return BoardItemAdapter.boardItemResponse(items,errors);
     }
 
-    @RequestMapping(value = "/boardlist/{no}", method = RequestMethod.GET)
-    public @ResponseBody BoardItemResponse boardlist(@PathVariable(value = "no")int no){
-        List<String> errors = new ArrayList<>();
-        List<BoardItem> items = null;
-        try{
-            items = service.boardlist(no);
-        }catch(Exception e){
-            errors.add(e.getMessage());
-        }
+//    @RequestMapping(value = "/board/{no}", method = RequestMethod.GET)
+//    public @ResponseBody BoardItemResponse boardlist(@PathVariable(value = "no")int no){
+//        List<String> errors = new ArrayList<>();
+//        List<BoardItem> items = null;
+//        try{
+//            items = service.boardlist(no);
+//        }catch(Exception e){
+//            errors.add(e.getMessage());
+//        }
+//
+//        return BoardItemAdapter.boardItemResponse(items,errors);
+//    }
 
-        return BoardItemAdapter.boardItemResponse(items,errors);
-    }
-
-    @RequestMapping(value = "/boardlist/{no}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/board/{no}", method = RequestMethod.DELETE)
     public void boardDelete(@PathVariable(value = "no")int no) throws Exception{
         service.boardlistdel(no);
+    }
+
+    @PostMapping("/board")
+    public void boardwrite(@RequestBody BoardItem item) throws Exception{
+        service.boardwrite(item);
+    }
+
+    @PutMapping("/board")
+    public void readcount(@RequestParam int no) throws Exception{
+        service.readcount(no);
     }
 
 

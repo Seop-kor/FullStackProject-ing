@@ -8,6 +8,14 @@
     <select id="boardlistnum" resultType="kr.co.demo.Board.BoardItem">
         select * from board where no = #{no}
     </select>
+    <insert id="boardwrite">
+        insert into board (title, content, name, pass, readcount, salt) values (#{title}, #{content}, #{name}, #{pass}, 0, #{salt})
+    </insert>
+
+    <update id="readcount">
+        update board set readcount = readcount + 1 where no = #{no}
+    </update>
+
     <delete id="boardDelete">
         delete from board where no = #{no}
     </delete>

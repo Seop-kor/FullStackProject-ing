@@ -28,7 +28,7 @@ class Product extends React.Component {
             </header>
             <div className="row text-center">
                 {product.map(function (prod) {
-                    return <ProductCard num={prod.num} imgaddr={prod.imgaddr} content={prod.content} title={prod.title} key={prod.num}/>;
+                    return <ProductCard num={prod.num} imgaddr={prod.imgaddr} content={prod.content} title={prod.title} key={prod.num} />;
                 })}
             </div>
         </div>;

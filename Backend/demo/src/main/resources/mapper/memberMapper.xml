@@ -3,7 +3,7 @@
 
 <mapper namespace="kr.co.demo.Member.MemberDAO">
     <select id="select" resultType="kr.co.demo.Member.MemberItem">
-        select mpass,salt from member where mid=#{mid}
+        select mpass,salt,mname from member where mid=#{mid}
     </select>
     <select id="idlist" resultType="kr.co.demo.Member.MemberItem">
         select count(mid) as count from member where mid=#{mid}

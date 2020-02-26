@@ -31,6 +31,8 @@ function BoardList({ no, title, name, writedate, readcount, content, pass }) {
     );
 }
 
+
+
 BoardList.propTypes = {
     no: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

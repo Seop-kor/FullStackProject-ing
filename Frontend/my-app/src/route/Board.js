@@ -1,22 +1,31 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import BoardList from '../BoardList';
 
 class Board extends React.Component {
-    state = {
-        Boards: []
+    state={
+        Boards: [],
     }
 
     getBoardList = async () => {
         const {
             data: { data }
         } = await axios.get("http://localhost:8080/board");
-        this.setState({ Boards: data });
+        
+        this.setState({
+            Boards: data
+        });
     }
 
     componentDidMount() {
         this.getBoardList();
+    }
+
+    checkLogin = () =>{
+        const {history} = this.props;
+        if(window.sessionStorage.getItem('id')){
+           history.push("/write"); 
+        }
     }
 
     render() {
@@ -24,7 +33,7 @@ class Board extends React.Component {
         return (
             <>
                 <div>
-                    <Link to="/write" className="btn btn-success">글쓰기</Link>
+                    <button type="button" className="btn btn-success" onClick={this.checkLogin}>글쓰기</button>
                 </div>
                 <div>
                     <table className="table table-hover">

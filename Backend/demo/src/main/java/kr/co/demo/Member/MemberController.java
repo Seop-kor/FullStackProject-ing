@@ -19,6 +19,7 @@ public class MemberController {
         MemberItem item = service.select(mid);
         list.add(item.getMpass());
         list.add(item.getSalt());
+        list.add(item.getMname());
         return list;
     }
 

@@ -14,11 +14,19 @@ public class BoardItemService {
         return dao.boardlist();
     }
 
-    public List<BoardItem> boardlist(int no) throws Exception{
-        return dao.boardlistnum(no);
-    }
+//    public List<BoardItem> boardlist(int no) throws Exception{
+//        return dao.boardlistnum(no);
+//    }
 
     public void boardlistdel(int no) throws Exception{
         dao.boardDelete(no);
+    }
+
+    public void boardwrite(BoardItem item) throws Exception{
+        dao.boardwrite(item);
+    }
+
+    public void readcount(int no) throws Exception{
+        dao.readcount(no);
     }
 }

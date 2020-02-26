@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface BoardItemDAO {
     public List<BoardItem> boardlist() throws Exception;
-    public List<BoardItem> boardlistnum(int no) throws Exception;
     public void boardDelete(int no) throws Exception;
+    public void boardwrite(BoardItem item) throws Exception;
+    public void readcount(int no) throws Exception;
 }

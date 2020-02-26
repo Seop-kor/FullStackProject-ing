@@ -2,6 +2,13 @@ import React from 'react';
 import axios from 'axios';
 
 class BoardDetail extends React.Component{
+
+    constructor(props){
+        super(props);
+        const {location} = props;
+        axios.put(`http://localhost:8080/board/?no=${location.state.no}`);
+    }
+
     componentDidMount(){
         const{location, history} = this.props;
         if(location.state === undefined){

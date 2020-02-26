@@ -2,16 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import crypto from 'crypto';
 
-class BoardWrite extends React.Component{
+class BoardWrite extends React.Component {
 
     writeboard = (e) => {
         e.preventDefault();
         const title = document.getElementById('title').value;
         const content = document.getElementById('content').value;
         const pass = document.getElementById('pass').value;
-        const {history} = this.props;
+        const { history } = this.props;
         crypto.randomBytes(64, (err, buf) => {
-            crypto.pbkdf2(pass, buf.toString('base64'), 100000, 64, 'sha512', async (err,key) => {
+            crypto.pbkdf2(pass, buf.toString('base64'), 100000, 64, 'sha512', async (err, key) => {
                 await axios.post("http://localhost:8080/board", {
                     title: title,
                     content: content,
@@ -23,7 +23,7 @@ class BoardWrite extends React.Component{
         });
     }
 
-    render(){
+    render() {
         return (
             <div className="justify-content-end">
                 <form method="post" onSubmit={this.writeboard}>

@@ -3,6 +3,8 @@ package kr.co.demo.Board;
 import lombok.*;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 @Data
 @Getter @Setter
@@ -17,4 +19,5 @@ public class BoardItem {
     private String pass;
     private Date writedate;
     private int readcount;
+    private String salt;
 }
