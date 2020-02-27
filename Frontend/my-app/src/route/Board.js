@@ -4,8 +4,9 @@ import BoardList from '../BoardList';
 
 class Board extends React.Component {
     state={
-        Boards: [],
+        Boards: []
     }
+
 
     getBoardList = async () => {
         const {
@@ -49,7 +50,6 @@ class Board extends React.Component {
                         {Boards.map(function (Board) {
                             return <BoardList no={Board.no} title={Board.title} name={Board.name} writedate={Board.writedate} readcount={Board.readcount} content={Board.content} pass={Board.pass} key={Board.no}/>
                         })}
-
                     </table>
                 </div>
             </>
