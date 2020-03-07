@@ -23,6 +23,11 @@ class Login extends React.Component{
         await axios.get(`http://localhost:8080/login/${id}`).then((data,error) => {
             crypto.pbkdf2(pass, data.data[1], 100000, 64, 'sha512', (err,key) =>{
                 if(key.toString('base64') === data.data[0]){
+                    const token = axios.post("http://localhost:8080/login/authenticate",{
+                        username: id,
+                        password: data.data[0]
+                    });
+                    console.log(token);
                     window.sessionStorage.setItem('id',id);
                     window.sessionStorage.setItem('name',data.data[2]);
                     history.push({
