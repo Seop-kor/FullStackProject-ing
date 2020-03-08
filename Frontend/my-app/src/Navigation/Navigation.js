@@ -5,12 +5,10 @@ class Navigation extends React.Component{
 
     constructor(props){
         super(props);
-        const id = window.sessionStorage.getItem('id');
-        const name = window.sessionStorage.getItem('name');
-        if(id){
+        const name = window.localStorage.getItem("name");
+        if(name){
             this.state={
                 login: true,
-                id,
                 name
             }
         }else{
@@ -23,7 +21,7 @@ class Navigation extends React.Component{
 
 
     Logout = () =>{
-        window.sessionStorage.clear();
+        window.localStorage.clear();
         this.setState({
             login: false
         });

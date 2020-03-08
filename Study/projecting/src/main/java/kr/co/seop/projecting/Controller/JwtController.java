@@ -30,12 +30,15 @@ public class JwtController {
     @Autowired
     private MemberService service;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @RequestMapping(value = "/login/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenVO req) throws Exception{
         authenticate(req.getUsername(), req.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-//        service.token(token);
+        MemberVO memberVO = new MemberVO();
+        memberVO.setToken(token);
+        memberVO.setMid(req.getUsername());
+        service.token(memberVO);
         return ResponseEntity.ok(new JwtResponse(token));
     }
 

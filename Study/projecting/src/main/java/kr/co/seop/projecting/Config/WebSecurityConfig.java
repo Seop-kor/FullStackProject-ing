@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -57,7 +58,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //antMatchers에 요청을 써서 인증하지않아도 되는 부분을 정함.
-        http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // /login/authenticate, /singup(post), /login/{id}(GET), /board(GET), /product(GET), /product{no} (GET) permitALL()
+        // /board/** (DELETE, POST),
+//        http.csrf().disable().authorizeRequests().antMatchers("/login/authenticate").permitAll().antMatchers(HttpMethod.POST,"/signup").permitAll().antMatchers("/login/**").permitAll().antMatchers(HttpMethod.GET,"/product/**").permitAll().antMatchers(HttpMethod.GET,"/board").permitAll().antMatchers(HttpMethod.PUT,"/board/**").permitAll().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.DELETE,"/board/**").authenticated().antMatchers(HttpMethod.POST,"/board").authenticated().antMatchers(HttpMethod.GET,"/product/{num}").authenticated().anyRequest().permitAll().and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

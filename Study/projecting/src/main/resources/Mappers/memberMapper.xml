@@ -3,7 +3,7 @@
 
 <mapper namespace="memberMapper">
     <select id="select" resultType="kr.co.seop.projecting.VO.MemberVO">
-        select mpass,salt,mname from member where mid=#{mid}
+        select mpass,mname from member where mid=#{mid}
     </select>
     <select id="idlist" resultType="kr.co.seop.projecting.VO.MemberVO">
         select count(mid) as count from member where mid=#{mid}
@@ -11,7 +11,7 @@
     <insert id="signup">
         insert into member (mid, mpass, mpass_check, mname, salt) values (#{mid}, #{mpass}, #{mpass_check}, #{mname}, #{salt})
     </insert>
-    <insert id="token">
-        insert into member (token) values(#{token})
-    </insert>
+    <update id="token">
+        update member set token=#{token} where mid=#{mid}
+    </update>
 </mapper>

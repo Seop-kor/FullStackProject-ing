@@ -10,11 +10,8 @@ import java.util.List;
 @Repository
 public class ImgBoardDAOImpl implements ImgBoardDAO {
     @Autowired
-    SqlSession sqlSession;
+    private SqlSession sqlSession;
 
-    public ImgBoardDAOImpl(){
-
-    }
 
     @Override
     public List<ImgBoardVO> select() throws Exception {

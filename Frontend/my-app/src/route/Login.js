@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 
 class Login extends React.Component{
     state={
@@ -20,14 +20,14 @@ class Login extends React.Component{
         if(id === undefined && pass === undefined){
             return;
         }
-        await axios.get(`http://localhost:8080/login/${id}`).then((data,error) => {
-            crypto.pbkdf2(pass, data.data[1], 100000, 64, 'sha512', (err,key) =>{
+        await axios.get(`http://localhost:8080/login/${id}`).then(async (data,error) => {
+            /*
+            crypto.pbkdf2(pass, data.data[1], 100000, 64, 'sha256', (err,key) =>{
                 if(key.toString('base64') === data.data[0]){
                     const token = axios.post("http://localhost:8080/login/authenticate",{
                         username: id,
                         password: data.data[0]
                     });
-                    console.log(token);
                     window.sessionStorage.setItem('id',id);
                     window.sessionStorage.setItem('name',data.data[2]);
                     history.push({
@@ -38,6 +38,21 @@ class Login extends React.Component{
                     alert("아이디나 패스워드가 일치하지않습니다.");
                 }
             });
+            */
+
+            if(bcrypt.compareSync(pass,data.data[0])){
+                await axios.post("http://localhost:8080/login/authenticate",{
+                    username: id,
+                    password: pass
+                }).then(function({data},err){
+                    window.localStorage.setItem("token",data.data);
+                });
+                window.localStorage.setItem("name",data.data[1]);
+                history.push("/");
+                window.location.reload();
+            }else{
+                alert("아이디나 패스워드가 일치하지않습니다.");
+            }
         });
         
     }

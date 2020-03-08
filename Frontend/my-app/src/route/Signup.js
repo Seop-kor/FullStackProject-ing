@@ -1,6 +1,6 @@
 import React from 'react';
-import crypto from 'crypto';
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 
 class Signup extends React.Component {
     state = {
@@ -48,6 +48,20 @@ class Signup extends React.Component {
         }else{
             return ;
         }
+
+        bcrypt.genSalt(8,(err,salt) => {
+            bcrypt.hash(pass,salt, (error,hash) => {
+                axios.post("http://localhost:8080/signup",{
+                    mid: this.state.id.toString(),
+                    mpass: hash.toString(),
+                    mpass_check: hash.toString(),
+                    mname: this.state.name.toString(),
+                    salt: salt
+                }).then(history.goBack());
+            });
+        });
+    
+        /*
         crypto.randomBytes(64, (err, buf) => {
             crypto.pbkdf2(pass, buf.toString('base64'), 100000, 64, 'sha512', async (err, key) => {
                 await axios.post(`http://localhost:8080/signup`,{
@@ -59,6 +73,7 @@ class Signup extends React.Component {
                 }).then(history.goBack());
             });
         });
+        */
     }
 
 

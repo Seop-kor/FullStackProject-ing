@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberServiceImpl implements MemberService {
     @Autowired
-    MemberDAO dao;
+    private MemberDAO dao;
 
     @Override
     public MemberVO select(String mid) throws Exception {
@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void token(String token) throws Exception {
-        dao.token(token);
+    public void token(MemberVO item) throws Exception {
+        dao.token(item);
     }
 }

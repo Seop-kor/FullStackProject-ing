@@ -4,7 +4,7 @@ class Detail extends React.Component{
 
     constructor(props){
         super(props);
-        if(!window.sessionStorage.getItem('id')){
+        if(!window.localStorage.getItem('token')){
             this.props.history.goBack();
         }
     }

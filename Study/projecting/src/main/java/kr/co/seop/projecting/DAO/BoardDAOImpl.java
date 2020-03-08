@@ -12,10 +12,6 @@ public class BoardDAOImpl implements BoardDAO{
     @Autowired
     private SqlSession sqlSession;
 
-    public BoardDAOImpl(){
-
-    }
-
     @Override
     public List<BoardVO> boardlist() throws Exception {
         return sqlSession.selectList("boardMapper.boardlist");

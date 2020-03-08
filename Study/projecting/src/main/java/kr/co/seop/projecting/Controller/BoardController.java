@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(value = "http://localhost:3000")
 public class BoardController {
     @Autowired
     private BoardService service;

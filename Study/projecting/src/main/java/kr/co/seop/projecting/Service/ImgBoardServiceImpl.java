@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ImgBoardServiceImpl implements ImgBoardService {
     @Autowired
-    ImgBoardDAO dao;
+    private ImgBoardDAO dao;
 
     @Override
     public List<ImgBoardVO> select() throws Exception {

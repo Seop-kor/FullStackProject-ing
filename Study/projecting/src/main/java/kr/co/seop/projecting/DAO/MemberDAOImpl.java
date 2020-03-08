@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MemberDAOImpl implements MemberDAO {
     @Autowired
-    SqlSession sqlSession;
+    private SqlSession sqlSession;
 
     @Override
     public MemberVO select(String mid) {
@@ -26,7 +26,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public void token(String token) throws Exception {
-        sqlSession.insert("memberMapper.token",token);
+    public void token(MemberVO item) throws Exception {
+        sqlSession.update("memberMapper.token",item);
     }
 }
